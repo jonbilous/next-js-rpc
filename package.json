@@ -4,6 +4,10 @@
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    "./server": "./dist/server/index.js",
+    "./client": "./dist/client/index.js"
+  },
   "scripts": {
     "test": "vitest",
     "test:ci": "vitest run --passWithNoTests",
