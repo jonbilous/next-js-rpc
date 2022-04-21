@@ -1,0 +1,7 @@
+{
+  "main": "dist/server/index.js",
+  "types": "dist/server/index.d.ts",
+  "peerDependencies": {
+    "react-query": "^3.36.0"
+  }
+}
