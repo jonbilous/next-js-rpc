@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.3](https://github.com/jonbilous/next-js-rpc/compare/v1.0.2...v1.0.3) (2022-04-21)
+
+
+### Bug Fixes
+
+* **package.json:** fix exports ([8a13df0](https://github.com/jonbilous/next-js-rpc/commit/8a13df0a29d24b6de2a1656bc3f17a962afcc2b3))
+
 ## [1.0.2](https://github.com/jonbilous/next-js-rpc/compare/v1.0.1...v1.0.2) (2022-04-21)
 
 
