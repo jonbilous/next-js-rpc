@@ -1,4 +1,4 @@
-# ts-npm-starter
+# next-js-rpc
 
 - Vitest for unit testing
 - Conventional commits and changelog generation
@@ -8,6 +8,5 @@
 ## Usage
 
 ```bash
-git clone git@github.com:jonbilous/ts-npm-starter.git
-npm ci
+npm i zod react-query @jonbilous/next-js-rpc
 ```

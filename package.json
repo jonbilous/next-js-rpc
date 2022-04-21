@@ -1,5 +1,5 @@
 {
-  "name": "@jonbilous/ts-npm-starter",
+  "name": "@jonbilous/next-js-rpc",
   "version": "1.15.0",
   "description": "",
   "main": "dist/index.js",
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jonbilous/ts-npm-starter"
+    "url": "https://github.com/jonbilous/next-js-rpc"
   },
   "author": "Jon Bilous",
   "license": "ISC",
@@ -65,5 +65,10 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "peerDependencies": {
+    "next": "^12.1.5",
+    "react-query": "^3.36.0",
+    "zod": "^3.14.4"
   }
 }
