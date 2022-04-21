@@ -1,4 +1,0 @@
-{
-  "main": "dist/client/index.js",
-  "types": "dist/client/index.d.ts"
-}
