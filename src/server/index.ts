@@ -6,10 +6,16 @@ import { GetFirstArgument, GetSecondArgument } from "../utils/types";
 type Request = IncomingMessage | NextApiRequest;
 type Response = ServerResponse | NextApiResponse;
 
-export interface Context {
+export type HandlerContext<T = {}> = T & {
   req: Request;
   res: Response;
-}
+};
+
+export type ContextResult<Ctx> = {
+  [key in keyof Ctx]: Ctx[key] extends (ctx: HandlerContext) => infer ReturnTpe
+    ? Awaited<ReturnTpe>
+    : never;
+};
 
 export type ApiFunction = (...args: any[]) => any;
 
@@ -35,16 +41,18 @@ export const createHandler = <
   RequestBody,
   ResponseType,
   Ctx extends {
-    [key: string]: (ctx: Context) => any;
+    [key: string]: (ctx: HandlerContext) => any;
   }
 >(
   fn: (
     data: RequestBody,
-    ctx: Context & {
-      [key in keyof Ctx]: Ctx[key] extends (ctx: Context) => infer ReturnTpe
+    ctx: HandlerContext<{
+      [key in keyof Ctx]: Ctx[key] extends (
+        ctx: HandlerContext
+      ) => infer ReturnTpe
         ? Awaited<ReturnTpe>
         : never;
-    }
+    }>
   ) => Promise<ResponseType>,
   schema?: ZodSchema<RequestBody>,
   ctx?: Ctx
@@ -65,8 +73,8 @@ export const createHandler = <
       const ctx2 = {} as Record<keyof Ctx, any>;
 
       await Promise.all(
-        Object.entries(ctx || {}).map(([key, value]) => {
-          ctx2[key as keyof Ctx] = value({ req, res });
+        Object.entries(ctx || {}).map(async ([key, value]) => {
+          ctx2[key as keyof Ctx] = await value({ req, res });
         })
       );
 
