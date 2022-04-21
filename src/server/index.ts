@@ -1,12 +1,17 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import zod, { Schema, ZodSchema } from "zod";
+import { IncomingMessage, ServerResponse } from "http";
+import { GetFirstArgument, GetSecondArgument } from "../utils/types";
+
+type Request = IncomingMessage | NextApiRequest;
+type Response = ServerResponse | NextApiResponse;
+
+export interface Context {
+  req: Request;
+  res: Response;
+}
 
 export type ApiFunction = (...args: any[]) => any;
-
-export type FunctionHandler<
-  RequestSchema extends Schema,
-  T extends undefined
-> = (data: InferSchema<RequestSchema>, request?: NextApiRequest) => Promise<T>;
 
 export interface ApiRequest<T> extends NextApiRequest {
   body: T;
@@ -26,23 +31,8 @@ export type InferResponse<T> = GetSecondArgument<T> extends NextApiResponse<
   ? T
   : never;
 
-type GetFirstArgument<T> = T extends (
-  first: infer FirstArgument,
-  ...args: any[]
-) => any
-  ? FirstArgument
-  : never;
-
-type GetSecondArgument<T> = T extends (
-  first: any,
-  second: infer SecondArgument,
-  ...args: any[]
-) => any
-  ? SecondArgument
-  : never;
-
 export const createHandler = <RequestBody, ResponseType>(
-  fn: (data: RequestBody, req?: NextApiRequest) => Promise<ResponseType>,
+  fn: (data: RequestBody, ctx: Context) => Promise<ResponseType>,
   schema?: ZodSchema<RequestBody>
 ) => {
   const handler = (
@@ -58,7 +48,7 @@ export const createHandler = <RequestBody, ResponseType>(
         ? schema.parse(req.body)
         : zod.any().parse(req.body);
 
-      return fn(validated, req)
+      return fn(validated, { req, res })
         .then((result) => res.status(200).json(result))
         .catch((err) => res.status(501).end());
     } catch (err) {
