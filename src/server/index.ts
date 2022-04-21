@@ -31,11 +31,25 @@ export type InferResponse<T> = GetSecondArgument<T> extends NextApiResponse<
   ? T
   : never;
 
-export const createHandler = <RequestBody, ResponseType>(
-  fn: (data: RequestBody, ctx: Context) => Promise<ResponseType>,
-  schema?: ZodSchema<RequestBody>
+export const createHandler = <
+  RequestBody,
+  ResponseType,
+  Ctx extends {
+    [key: string]: (ctx: Context) => any;
+  }
+>(
+  fn: (
+    data: RequestBody,
+    ctx: Context & {
+      [key in keyof Ctx]: Ctx[key] extends (ctx: Context) => infer ReturnTpe
+        ? Awaited<ReturnTpe>
+        : never;
+    }
+  ) => Promise<ResponseType>,
+  schema?: ZodSchema<RequestBody>,
+  ctx?: Ctx
 ) => {
-  const handler = (
+  const handler = async (
     req: ApiRequest<RequestBody>,
     res: NextApiResponse<ResponseType>
   ) => {
@@ -48,7 +62,15 @@ export const createHandler = <RequestBody, ResponseType>(
         ? schema.parse(req.body)
         : zod.any().parse(req.body);
 
-      return fn(validated, { req, res })
+      const ctx2 = {} as Record<keyof Ctx, any>;
+
+      await Promise.all(
+        Object.entries(ctx || {}).map(([key, value]) => {
+          ctx2[key as keyof Ctx] = value({ req, res });
+        })
+      );
+
+      return fn(validated, { req, res, ...ctx2 })
         .then((result) => res.status(200).json(result))
         .catch((err) => res.status(501).end());
     } catch (err) {
