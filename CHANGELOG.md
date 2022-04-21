@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.1](https://github.com/jonbilous/next-js-rpc/compare/v1.0.0...v1.0.1) (2022-04-21)
+
+
+### Bug Fixes
+
+* **entry points:** attempt to create multiple entry points ([03179b5](https://github.com/jonbilous/next-js-rpc/commit/03179b5bd7b96f86e9fc66f51528605def8e826a))
+* **package.json:** move peer deps back to main package.json ([256f526](https://github.com/jonbilous/next-js-rpc/commit/256f526493138c791c7299e5298da0a845b70a6b))
+
 # 1.0.0 (2022-04-21)
 
 
