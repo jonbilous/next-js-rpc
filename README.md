@@ -44,7 +44,8 @@ export default handler;
 ```js
 import { Button } from "@chakra-ui/react";
 import { useMutation } from "@jonbilous/next-js-rpc/";
-import type { HelloRequest, HelloResponse, hello } from "pages/api/functions";
+import type { HelloRequest, HelloResponse } from "pages/api/functions/hello";
+import { hello } from "pages/api/functions/hello";
 import type { GetServerSideProps, NextPage } from "next";
 
 export const getServerSideProps: GetServerSideProps = async (req) => {
@@ -54,8 +55,8 @@ export const getServerSideProps: GetServerSideProps = async (req) => {
 };
 
 const Home: NextPage<ServerProps> = (props) => {
-  const products = useMutation<GetProductsRequest, GetProductsResponse>(
-    "/api/functions/"
+  const products = useMutation<HelloRequest, HelloResponse>(
+    "/api/functions/hello"
   );
 
   return (
