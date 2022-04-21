@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/jonbilous/next-js-rpc/compare/v1.2.0...v1.3.0) (2022-04-21)
+
+
+### Features
+
+* **server:** add context middleware ([e5899f8](https://github.com/jonbilous/next-js-rpc/commit/e5899f83ceb2b687425a1b21fddf939a1518de79))
+
 # [1.2.0](https://github.com/jonbilous/next-js-rpc/compare/v1.1.2...v1.2.0) (2022-04-21)
 
 
