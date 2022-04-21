@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.2](https://github.com/jonbilous/next-js-rpc/compare/v1.1.1...v1.1.2) (2022-04-21)
+
+
+### Bug Fixes
+
+* **package.json:** restructure package ([a90f9bb](https://github.com/jonbilous/next-js-rpc/commit/a90f9bbca7edca5ad49769c6ff6599c8065fc418))
+
 ## [1.1.1](https://github.com/jonbilous/next-js-rpc/compare/v1.1.0...v1.1.1) (2022-04-21)
 
 
