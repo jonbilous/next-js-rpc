@@ -1,8 +1,4 @@
 {
   "main": "dist/client/index.js",
-  "types": "dist/client/index.d.ts",
-  "peerDependencies": {
-    "next": "^12.1.5",
-    "zod": "^3.14.4"
-  }
+  "types": "dist/client/index.d.ts"
 }

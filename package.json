@@ -65,5 +65,10 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "peerDependencies": {
+    "next": "^12.1.5",
+    "zod": "^3.14.4",
+    "react-query": "^3.36.0"
   }
 }
