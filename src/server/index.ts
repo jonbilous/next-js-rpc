@@ -70,8 +70,6 @@ export const createHandler = <
         Object.entries(ctx || {}).map(async ([key, fn]) => {
           const result = await fn({ req, res });
 
-          console.log({ result, key });
-
           contextResult[key as keyof Ctx] = result;
         })
       );
@@ -84,5 +82,18 @@ export const createHandler = <
     }
   };
 
-  return handler;
+  const serverFn = async (data: RequestBody, { req, res }: HandlerContext) => {
+    const contextResult = {} as Record<keyof Ctx, any>;
+
+    await Promise.all(
+      Object.entries(ctx || {}).map(async ([key, ctxFn]) => {
+        const result = await ctxFn({ req, res });
+        contextResult[key as keyof Ctx] = result;
+      })
+    );
+
+    return fn(data, { ...contextResult, req, res });
+  };
+
+  return [handler, serverFn];
 };
