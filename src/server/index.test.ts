@@ -14,7 +14,7 @@ describe("test createHandler", () => {
 
     const { req, res } = createMocks({ method: "POST" });
 
-    const handler = createHandler(
+    const [handler] = createHandler(
       async (data, ctx) => {
         return ctx.user;
       },
