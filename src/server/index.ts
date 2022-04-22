@@ -46,13 +46,7 @@ export const createHandler = <
 >(
   fn: (
     data: RequestBody,
-    ctx: HandlerContext<{
-      [key in keyof Ctx]: Ctx[key] extends (
-        ctx: HandlerContext
-      ) => infer ReturnTpe
-        ? Awaited<ReturnTpe>
-        : never;
-    }>
+    ctx: HandlerContext<ContextResult<Ctx>>
   ) => Promise<ResponseType>,
   schema?: ZodSchema<RequestBody>,
   ctx?: Ctx
@@ -70,19 +64,23 @@ export const createHandler = <
         ? schema.parse(req.body)
         : zod.any().parse(req.body);
 
-      const ctx2 = {} as Record<keyof Ctx, any>;
+      const contextResult = {} as Record<keyof Ctx, any>;
 
       await Promise.all(
-        Object.entries(ctx || {}).map(async ([key, value]) => {
-          ctx2[key as keyof Ctx] = await value({ req, res });
+        Object.entries(ctx || {}).map(async ([key, fn]) => {
+          const result = await fn({ req, res });
+
+          console.log({ result, key });
+
+          contextResult[key as keyof Ctx] = result;
         })
       );
 
-      return fn(validated, { req, res, ...ctx2 })
+      return fn(validated, { req, res, ...contextResult })
         .then((result) => res.status(200).json(result))
         .catch((err) => res.status(501).end());
     } catch (err) {
-      return res.status(400).json({ error: "Request validation error" } as any);
+      return res.status(400).json({ error: "Error" } as any);
     }
   };
 
