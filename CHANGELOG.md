@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.7.0](https://github.com/jonbilous/next-js-rpc/compare/v1.6.0...v1.7.0) (2022-04-22)
+
+
+### Features
+
+* **exports:** export only server ([9c0cba5](https://github.com/jonbilous/next-js-rpc/commit/9c0cba556aac77bc4806a8e4e4a934be6848e8ba))
+
 # [1.6.0](https://github.com/jonbilous/next-js-rpc/compare/v1.5.0...v1.6.0) (2022-04-22)
 
 
