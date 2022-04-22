@@ -95,5 +95,5 @@ export const createHandler = <
     return fn(data, { ...contextResult, req, res });
   };
 
-  return [handler, serverFn];
+  return [handler, serverFn] as const;
 };
