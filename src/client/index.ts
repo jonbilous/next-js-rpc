@@ -1,6 +1,6 @@
 import { useQuery, useMutation } from "react-query";
 
-const rpcFetch = <Request, Response>(
+const fetcher = <Request, Response>(
   url: string,
   request: Request
 ): Promise<Response> => {
@@ -13,14 +13,14 @@ const rpcFetch = <Request, Response>(
 
 const useApiQuery = <Request, Response>(url: string, request: Request) => {
   return useQuery([url, request], () => {
-    return rpcFetch<Request, Response>(url, request);
+    return fetcher<Request, Response>(url, request);
   });
 };
 
 const useApiMutation = <Request, Response>(url: string) => {
   return useMutation((request: Request) => {
-    return rpcFetch<Request, Response>(url, request);
+    return fetcher<Request, Response>(url, request);
   });
 };
 
-export { useApiQuery as useQuery, useApiMutation as useMutation, rpcFetch };
+export { useApiQuery as useQuery, useApiMutation as useMutation, fetcher };

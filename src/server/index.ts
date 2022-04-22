@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import zod, { Schema, ZodSchema } from "zod";
 import { IncomingMessage, ServerResponse } from "http";
 import { GetFirstArgument, GetSecondArgument } from "../utils/types";
+import { fetcher, useMutation, useQuery } from "../client";
 
 type Request = IncomingMessage | NextApiRequest;
 type Response = ServerResponse | NextApiResponse;
@@ -44,6 +45,7 @@ export const createHandler = <
     [key: string]: (ctx: HandlerContext) => any;
   }
 >(
+  url: string,
   fn: (
     data: RequestBody,
     ctx: HandlerContext<ContextResult<Ctx>>
@@ -95,5 +97,12 @@ export const createHandler = <
     return fn(data, { ...contextResult, req, res });
   };
 
-  return [handler, serverFn] as const;
+  const client = {
+    useMutation: () => useMutation<RequestBody, ResponseType>(url),
+    useQuery: (request: RequestBody) =>
+      useQuery<RequestBody, ResponseType>(url, request),
+    fetcher: (request: RequestBody) => fetcher(url, request),
+  };
+
+  return [handler, serverFn, client] as const;
 };
