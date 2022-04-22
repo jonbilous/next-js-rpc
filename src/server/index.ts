@@ -1,11 +1,25 @@
+import { IncomingMessage, ServerResponse } from "http";
 import { NextApiRequest, NextApiResponse } from "next";
 import zod, { Schema, ZodSchema } from "zod";
-import { IncomingMessage, ServerResponse } from "http";
 import { GetFirstArgument, GetSecondArgument } from "../utils/types";
-import { fetcher, useMutation, useQuery } from "../client";
 
 type Request = IncomingMessage | NextApiRequest;
 type Response = ServerResponse | NextApiResponse;
+
+type HandlerDefinition<
+  RequestBody = unknown,
+  ResponseType = unknown,
+  Ctx = unknown,
+  Url = unknown
+> = {
+  url: Url;
+  fn: (
+    data: RequestBody,
+    ctx: HandlerContext<ContextResult<Ctx>>
+  ) => Promise<ResponseType>;
+  schema?: ZodSchema<RequestBody>;
+  ctx?: Ctx;
+};
 
 export type HandlerContext<T = {}> = T & {
   req: Request;
@@ -18,17 +32,17 @@ export type ContextResult<Ctx> = {
     : never;
 };
 
-export type ApiFunction = (...args: any[]) => any;
-
-export interface ApiRequest<T> extends NextApiRequest {
+export interface ApiRequest<T, E> extends NextApiRequest {
   body: T;
+  endpoint: E;
 }
 
 export type InferSchema<T extends Schema> = zod.infer<T>;
-export type QueryResult<F extends ApiFunction> = Awaited<ReturnType<F>>;
-export type QueryArrayResult<F extends ApiFunction> = QueryResult<F>[number];
 
-export type InferRequest<T> = GetFirstArgument<T> extends ApiRequest<infer T>
+export type InferRequest<T> = GetFirstArgument<T> extends ApiRequest<
+  infer T,
+  any
+>
   ? T
   : never;
 
@@ -38,23 +52,24 @@ export type InferResponse<T> = GetSecondArgument<T> extends NextApiResponse<
   ? T
   : never;
 
+export type InferUrl<T> = GetFirstArgument<T> extends ApiRequest<any, infer E>
+  ? E
+  : never;
+
 export const createHandler = <
   RequestBody,
   ResponseType,
+  Url extends string,
   Ctx extends {
     [key: string]: (ctx: HandlerContext) => any;
   }
->(
-  url: string,
-  fn: (
-    data: RequestBody,
-    ctx: HandlerContext<ContextResult<Ctx>>
-  ) => Promise<ResponseType>,
-  schema?: ZodSchema<RequestBody>,
-  ctx?: Ctx
-) => {
+>({
+  fn,
+  schema,
+  ctx,
+}: HandlerDefinition<RequestBody, ResponseType, Ctx, Url>) => {
   const handler = async (
-    req: ApiRequest<RequestBody>,
+    req: ApiRequest<RequestBody, Url>,
     res: NextApiResponse<ResponseType>
   ) => {
     try {
@@ -97,12 +112,5 @@ export const createHandler = <
     return fn(data, { ...contextResult, req, res });
   };
 
-  const client = {
-    useMutation: () => useMutation<RequestBody, ResponseType>(url),
-    useQuery: (request: RequestBody) =>
-      useQuery<RequestBody, ResponseType>(url, request),
-    fetcher: (request: RequestBody) => fetcher(url, request),
-  };
-
-  return [handler, serverFn, client] as const;
+  return [handler, serverFn] as const;
 };

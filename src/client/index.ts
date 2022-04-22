@@ -1,25 +1,26 @@
-import { useQuery, useMutation } from "react-query";
+import { useMutation, useQuery } from "react-query";
+import { InferRequest, InferResponse, InferUrl } from "../server";
 
-const fetcher = <Request, Response>(
-  url: string,
-  request: Request
-): Promise<Response> => {
-  return fetch(url, {
+const fetcher = <T>(
+  url: InferUrl<T>,
+  request: InferRequest<T>
+): Promise<InferResponse<T>> => {
+  return fetch(String(url), {
     body: JSON.stringify(request),
     method: "POST",
     headers: { "Content-Type": "application/json" },
   }).then((res) => res.json());
 };
 
-const useApiQuery = <Request, Response>(url: string, request: Request) => {
+const useApiQuery = <T>(url: InferUrl<T>, request: InferRequest<T>) => {
   return useQuery([url, request], () => {
-    return fetcher<Request, Response>(url, request);
+    return fetcher<T>(url, request);
   });
 };
 
-const useApiMutation = <Request, Response>(url: string) => {
-  return useMutation((request: Request) => {
-    return fetcher<Request, Response>(url, request);
+const useApiMutation = <T>(url: InferUrl<T>) => {
+  return useMutation((request: InferRequest<T>) => {
+    return fetcher(url, request);
   });
 };
 

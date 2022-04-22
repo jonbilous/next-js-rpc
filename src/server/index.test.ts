@@ -14,16 +14,16 @@ describe("test createHandler", () => {
 
     const { req, res } = createMocks({ method: "POST" });
 
-    const [handler] = createHandler(
-      "/hello",
-      async (data, ctx) => {
+    const [handler] = createHandler({
+      url: "/hello",
+      fn: async (data, ctx) => {
         return ctx.user;
       },
-      undefined,
-      {
+      schema: undefined,
+      ctx: {
         user: mockCtx,
-      }
-    );
+      },
+    });
 
     await handler(req, res);
 
