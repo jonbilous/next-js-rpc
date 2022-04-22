@@ -13,65 +13,56 @@ npm i zod react-query @jonbilous/next-js-rpc
 ## Next.JS API
 
 ```js
-import type { NextApiRequest } from "next";
-import {
-  createHandler,
-  InferRequest,
-  InferResponse,
-  InferSchema,
-} from "@jonbilous/next-js-rpc/";
+import { createHandler } from "@jonbilous/next-js-rpc/";
+import { getUserSession } from "utils/ctx";
+import db from "utils/db";
 import zod from "zod";
 
-const schema = zod.object({ world: zod.string() });
-
-export const hello = async (
-  data: InferSchema<typeof schema>,
-  req?: NextApiRequest
-) => {
-  return "Hello " + data.world;
+const ctx = {
+  user: getUserSession,
 };
 
-const handler = createHandler(hello, schema);
+const schema = zod.null();
 
-export type HelloRequest = InferRequest<typeof handler>;
-export type HelloResponse = InferResponse<typeof handler>;
+const [handler, getLocations] = createHandler({
+  url: "/api/functions",
+  fn: async (params, ctx) => {
+    return db.location.findMany();
+  },
+  schema,
+  ctx,
+});
 
+export type LocationQuery = typeof handler;
+
+export { getLocations };
 export default handler;
 ```
 
 ## Next.JS Page
 
 ```js
-import { Button } from "@chakra-ui/react";
-import { useMutation } from "@jonbilous/next-js-rpc/";
-import type { HelloRequest, HelloResponse } from "pages/api/functions/hello";
-import { hello } from "pages/api/functions/hello";
+import { useUser } from "@auth0/nextjs-auth0";
+import { client } from "@jonbilous/next-js-rpc";
 import type { GetServerSideProps, NextPage } from "next";
+import type { LocationQuery } from "pages/api/functions";
+import { getLocations } from "pages/api/functions";
 
-export const getServerSideProps: GetServerSideProps = async (req) => {
-  const res = await hello({ world: "world" });
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const locations = await getLocations(null, ctx);
+  // import getLocations directly on the server
 
-  return { props: res };
+  return { props: { locations } };
 };
 
-const Home: NextPage<ServerProps> = (props) => {
-  const products = useMutation<HelloRequest, HelloResponse>(
-    "/api/functions/hello"
-  );
+const Home: NextPage = (props) => {
+  const user = useUser();
 
-  return (
-    <Button
-      onClick={() => {
-        products
-          .mutateAsync({ hello: "world" })
-          .then((res) => toast({ title: JSON.stringify(res) }));
-      }}
-    >
-      Mutate
-    </Button>
-  );
+  const query = client.useQuery < LocationQuery > ("/api/functions", null);
+  // type provides url, request, and response types
+
+  return <div></div>;
 };
 
 export default Home;
-
 ```
