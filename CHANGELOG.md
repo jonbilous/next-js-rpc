@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.8.0](https://github.com/jonbilous/next-js-rpc/compare/v1.7.0...v1.8.0) (2022-04-22)
+
+
+### Features
+
+* **server & client:** no more server code ending up on the clienrt ([6b73ba9](https://github.com/jonbilous/next-js-rpc/commit/6b73ba9c2092800a267bbaad2693a437da5409aa))
+
 # [1.7.0](https://github.com/jonbilous/next-js-rpc/compare/v1.6.0...v1.7.0) (2022-04-22)
 
 
