@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.10.0](https://github.com/jonbilous/next-js-rpc/compare/v1.9.0...v1.10.0) (2022-04-22)
+
+
+### Features
+
+* **server:** add server function as property of handler ([f00e03a](https://github.com/jonbilous/next-js-rpc/commit/f00e03aae11515384925c95c98086d30ed5cad65))
+
 # [1.9.0](https://github.com/jonbilous/next-js-rpc/compare/v1.8.0...v1.9.0) (2022-04-22)
 
 
