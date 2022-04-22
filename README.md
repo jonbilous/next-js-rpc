@@ -24,7 +24,7 @@ const ctx = {
 
 const schema = zod.null();
 
-const [handler, getLocations] = createHandler({
+const getLocations = createHandler({
   url: "/api/functions",
   fn: async (params, ctx) => {
     return db.location.findMany();
@@ -33,33 +33,27 @@ const [handler, getLocations] = createHandler({
   ctx,
 });
 
-export type LocationQuery = typeof handler;
+export type LocationQuery = typeof getLocations;
 
-export { getLocations };
-export default handler;
+export default getLocations;
 ```
 
 ## Next.JS Page
 
 ```js
-import { useUser } from "@auth0/nextjs-auth0";
 import { client } from "@jonbilous/next-js-rpc";
 import type { GetServerSideProps, NextPage } from "next";
 import type { LocationQuery } from "pages/api/functions";
-import { getLocations } from "pages/api/functions";
+import getLocations from "pages/api/functions";
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const locations = await getLocations(null, ctx);
-  // import getLocations directly on the server
+  const products = await getLocations.ssr(null, ctx);
 
-  return { props: { locations } };
+  return { props: { products } };
 };
 
 const Home: NextPage = (props) => {
-  const user = useUser();
-
   const query = client.useQuery < LocationQuery > ("/api/functions", null);
-  // type provides url, request, and response types
 
   return <div></div>;
 };
