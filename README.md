@@ -47,14 +47,14 @@ import type { LocationQuery } from "pages/api/functions";
 import getLocations from "pages/api/functions";
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const products = await getLocations.ssr(null, ctx);
-
-  return { props: { products } };
+  const locations = await getLocations.ssr(null, ctx);
+  // import handler and call .ssr() to use on the server
+  return { props: { locations } };
 };
 
 const Home: NextPage = (props) => {
   const query = client.useQuery < LocationQuery > ("/api/functions", null);
-
+  // import type on the client and pass to useQuery - url, request type and response types will be inferred
   return <div></div>;
 };
 

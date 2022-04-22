@@ -1,6 +1,6 @@
 import { createMocks } from "node-mocks-http";
-import { describe, test, expect, vi } from "vitest";
-import { createHandler, HandlerContext } from ".";
+import { describe, expect, test, vi } from "vitest";
+import { createHandler } from ".";
 
 describe("test createHandler", () => {
   test("context works", async () => {
