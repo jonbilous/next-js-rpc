@@ -1,3 +1,3 @@
-export * from "./server/";
 export * as client from "./client";
-export type { QueryResult, QueryArrayResult } from "./utils/types";
+export * from "./server/";
+export type { QueryArrayResult, QueryResult } from "./utils/types";

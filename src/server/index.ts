@@ -6,12 +6,7 @@ import { GetFirstArgument, GetSecondArgument } from "../utils/types";
 type Request = IncomingMessage | NextApiRequest;
 type Response = ServerResponse | NextApiResponse;
 
-type HandlerDefinition<
-  RequestBody = unknown,
-  ResponseType = unknown,
-  Ctx = unknown,
-  Url = unknown
-> = {
+type HandlerDefinition<RequestBody, ResponseType, Ctx, Url> = {
   url: Url;
   fn: (
     data: RequestBody,
@@ -112,5 +107,7 @@ export const createHandler = <
     return fn(data, { ...contextResult, req, res });
   };
 
-  return [handler, serverFn] as const;
+  handler.ssr = serverFn;
+
+  return handler;
 };
