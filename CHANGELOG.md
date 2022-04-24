@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.14.0](https://github.com/jonbilous/next-js-rpc/compare/v1.13.0...v1.14.0) (2022-04-24)
+
+
+### Features
+
+* **cache:** ssr function to use cache ([ddbcb09](https://github.com/jonbilous/next-js-rpc/commit/ddbcb092a2f13a2f5823bc21931804b2c6865f65))
+
 # [1.13.0](https://github.com/jonbilous/next-js-rpc/compare/v1.12.0...v1.13.0) (2022-04-24)
 
 
