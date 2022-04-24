@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.12.0](https://github.com/jonbilous/next-js-rpc/compare/v1.11.0...v1.12.0) (2022-04-22)
+
+
+### Features
+
+* **readme:** updated readme ([ca3a90c](https://github.com/jonbilous/next-js-rpc/commit/ca3a90cd43dc94679f1a4addabbf87b440c91dde))
+
 # [1.11.0](https://github.com/jonbilous/next-js-rpc/compare/v1.10.0...v1.11.0) (2022-04-22)
 
 
