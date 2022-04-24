@@ -1,15 +1,26 @@
 import { createMocks } from "node-mocks-http";
 import { describe, expect, test, vi } from "vitest";
-import { createHandler } from ".";
+import { createApi } from ".";
 
 describe("test createHandler", () => {
   test("context works", async () => {
     const testValue = "user";
 
     const mockCtx = vi.fn(async () => {
-      return new Promise((resolve, reject) =>
+      return new Promise<string>((resolve, reject) =>
         setTimeout(() => resolve(testValue), 2000)
       );
+    });
+
+    const { createHandler } = createApi({
+      cacheProvider: {
+        defaultTtl: 5000,
+        get: async <T extends unknown>(key: string) => {
+          return "z" as T;
+        },
+        write: async (key) => {},
+        flush: async (key) => {},
+      },
     });
 
     const { req, res } = createMocks({ method: "POST" });
