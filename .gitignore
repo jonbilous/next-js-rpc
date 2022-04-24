@@ -1,2 +1,12 @@
-node_modules
-dist
+/*
+!README.md
+!CHANGELOG.md
+!.npmignore
+!.husky
+!.github
+!package.json
+!package-lock.json
+!tsconfig.json
+!vite.config.ts
+!yarn.lock
+!src

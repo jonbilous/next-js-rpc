@@ -1,73 +1,11 @@
-import { IncomingMessage, ServerResponse } from "http";
-import { NextApiRequest, NextApiResponse } from "next";
-import zod, { Schema, ZodSchema } from "zod";
-import { GetFirstArgument, GetSecondArgument } from "../utils/types";
-
-type Request = IncomingMessage | NextApiRequest;
-type Response = ServerResponse | NextApiResponse;
-
-type HandlerDefinition<RequestBody, ResponseType, Ctx, Url> = {
-  url: Url;
-  fn: (
-    data: RequestBody,
-    ctx: HandlerContext<ContextResult<Ctx>>
-  ) => Promise<ResponseType>;
-  schema?: ZodSchema<RequestBody>;
-  ctx?: Ctx;
-  cache?: {
-    ttl?: number;
-    getKey: (
-      data: RequestBody,
-      ctx: HandlerContext<ContextResult<Ctx>>
-    ) => string;
-  };
-};
-
-export type HandlerContext<T = {}> = T & {
-  req: Request;
-  res: Response;
-};
-
-export type ContextResult<Ctx> = {
-  [key in keyof Ctx]: Ctx[key] extends (ctx: HandlerContext) => infer ReturnTpe
-    ? Awaited<ReturnTpe>
-    : never;
-};
-
-export interface ApiRequest<T, E> extends NextApiRequest {
-  body: T;
-  endpoint: E;
-}
-
-export type InferSchema<T extends Schema> = zod.infer<T>;
-
-export type InferRequest<T> = GetFirstArgument<T> extends ApiRequest<
-  infer T,
-  any
->
-  ? T
-  : never;
-
-export type InferResponse<T> = GetSecondArgument<T> extends NextApiResponse<
-  infer T
->
-  ? T
-  : never;
-
-export type InferUrl<T> = GetFirstArgument<T> extends ApiRequest<any, infer E>
-  ? E
-  : never;
-
-interface CacheProvider {
-  get: <T extends unknown>(key: string) => Promise<T>;
-  write: <T extends unknown>(
-    key: string,
-    data: T,
-    ttl: number
-  ) => Promise<void>;
-  flush: (key: string) => Promise<any>;
-  defaultTtl: number;
-}
+import { NextApiResponse } from "next";
+import {
+  ApiRequest,
+  CacheProvider,
+  HandlerContext,
+  HandlerDefinition,
+} from "types";
+import zod from "zod";
 
 export const createApi = ({
   cacheProvider,

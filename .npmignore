@@ -1,2 +1,5 @@
 src
 .github
+.husky
+tsconfig.json
+vite.config.ts

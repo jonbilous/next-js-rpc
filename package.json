@@ -2,8 +2,8 @@
   "name": "@jonbilous/next-js-rpc",
   "version": "1.14.0",
   "description": "",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "./index.js",
+  "types": "./index.d.ts",
   "scripts": {
     "test": "vitest",
     "test:ci": "vitest run --passWithNoTests",

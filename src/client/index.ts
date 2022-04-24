@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "react-query";
-import { InferRequest, InferResponse, InferUrl } from "../server";
+import { InferRequest, InferResponse, InferUrl } from "types";
 
 const fetcher = <T>(
   url: InferUrl<T>,
