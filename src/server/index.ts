@@ -1,10 +1,10 @@
 import { NextApiResponse } from "next";
-import {
+import type {
   ApiRequest,
   CacheProvider,
   HandlerContext,
   HandlerDefinition,
-} from "types";
+} from "../types";
 import zod from "zod";
 
 export const createApi = ({

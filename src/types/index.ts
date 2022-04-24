@@ -17,8 +17,8 @@ type GetSecondArgument<T> = T extends (
   ? SecondArgument
   : never;
 
-type Request = IncomingMessage | NextApiRequest;
-type Response = ServerResponse | NextApiResponse;
+export type Request = IncomingMessage | NextApiRequest;
+export type Response = ServerResponse | NextApiResponse;
 
 export type HandlerDefinition<RequestBody, ResponseType, Ctx, Url> = {
   url: Url;

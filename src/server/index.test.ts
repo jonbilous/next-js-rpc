@@ -1,6 +1,7 @@
 import { createMocks } from "node-mocks-http";
 import { describe, expect, test, vi } from "vitest";
 import { createApi } from ".";
+import zod from "zod";
 
 describe("test createHandler", () => {
   test("context works", async () => {
@@ -30,7 +31,7 @@ describe("test createHandler", () => {
       fn: async (data, ctx) => {
         return ctx.user;
       },
-      schema: undefined,
+      schema: zod.any(),
       ctx: {
         user: mockCtx,
       },
