@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.13.0](https://github.com/jonbilous/next-js-rpc/compare/v1.12.0...v1.13.0) (2022-04-24)
+
+
+### Features
+
+* **caching:** add caching feature ([a8bab6a](https://github.com/jonbilous/next-js-rpc/commit/a8bab6a013b90903a245f84a7f70f391b1b8e0f5))
+
 # [1.12.0](https://github.com/jonbilous/next-js-rpc/compare/v1.11.0...v1.12.0) (2022-04-22)
 
 
