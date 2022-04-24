@@ -10,7 +10,7 @@
     "build": "tsc",
     "commit": "cz",
     "prepare": "husky install",
-    "pre-commit": "npm run test:ci"
+    "pre-commit": "npm run test:ci && npm run build"
   },
   "repository": {
     "type": "git",
