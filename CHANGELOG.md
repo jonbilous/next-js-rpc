@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.15.1](https://github.com/jonbilous/next-js-rpc/compare/v1.15.0...v1.15.1) (2022-04-24)
+
+
+### Bug Fixes
+
+* **type imports:** fix type imports ([ea6a990](https://github.com/jonbilous/next-js-rpc/commit/ea6a990c50705c9eba6fad4e3c421abe859d8deb))
+
 # [1.15.0](https://github.com/jonbilous/next-js-rpc/compare/v1.14.0...v1.15.0) (2022-04-24)
 
 
