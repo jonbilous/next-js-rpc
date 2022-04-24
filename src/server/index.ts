@@ -146,6 +146,8 @@ export const createApi = ({
       data: RequestBody,
       { req, res }: HandlerContext
     ) => {
+      const validated = schema ? schema.parse(data) : zod.any().parse(data);
+
       const contextResult = {} as Record<keyof Ctx, any>;
 
       await Promise.all(
@@ -155,7 +157,29 @@ export const createApi = ({
         })
       );
 
-      return fn(data, { ...contextResult, req, res });
+      const handlerCtx = { ...contextResult, req, res };
+
+      if (cache) {
+        const key = cache.getKey(validated, handlerCtx);
+
+        const cachedResult = await cacheProvider.get<ResponseType>(key);
+
+        if (cachedResult) {
+          return cachedResult;
+        } else {
+          const result = await fn(validated, handlerCtx);
+
+          cacheProvider.write(
+            key,
+            result,
+            cache.ttl ?? cacheProvider.defaultTtl
+          );
+
+          return result;
+        }
+      }
+
+      return fn(validated, handlerCtx);
     };
 
     handler.ssr = serverFn;
