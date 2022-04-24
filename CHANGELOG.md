@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.15.0](https://github.com/jonbilous/next-js-rpc/compare/v1.14.0...v1.15.0) (2022-04-24)
+
+
+### Features
+
+* **structure:** support nested imports ([d828fa3](https://github.com/jonbilous/next-js-rpc/commit/d828fa329148abb914b55336726d55a323350dba))
+
 # [1.14.0](https://github.com/jonbilous/next-js-rpc/compare/v1.13.0...v1.14.0) (2022-04-24)
 
 
