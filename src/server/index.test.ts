@@ -3,6 +3,7 @@ import { describe, expect, test, vi } from "vitest";
 import { createApi, HTTPError } from ".";
 import zod, { ZodDate } from "zod";
 import { CacheProvider } from "types";
+import superjson from "superjson";
 
 const cacheProvider: CacheProvider = {
   defaultTtl: 5000,
@@ -44,7 +45,7 @@ describe("test createHandler", () => {
 
     expect(mockCtx).toBeCalledTimes(1);
 
-    const result = JSON.parse(res._getData());
+    const result = superjson.parse(res._getData());
 
     expect(result).toBe(testValue);
   });
@@ -70,7 +71,7 @@ describe("test createHandler", () => {
 
     await handler(req, res);
 
-    const result = JSON.parse(res._getData());
+    const result = superjson.parse<{ error: string }>(res._getData());
 
     expect(res.statusCode).toBe(code);
     expect(result).toHaveProperty("error");
@@ -102,7 +103,7 @@ describe("test createHandler", () => {
 
     await handler(req, res);
 
-    const result = JSON.parse(res._getData());
+    const result = superjson.parse<{ error: string }>(res._getData());
 
     expect(res.statusCode).toBe(code);
     expect(result).toHaveProperty("error");
@@ -129,7 +130,7 @@ describe("test createHandler", () => {
 
     await handler(req, res);
 
-    const result = JSON.parse(res._getData());
+    const result = superjson.parse<{ error: string }>(res._getData());
 
     expect(res.statusCode).toBe(501);
 
@@ -156,7 +157,7 @@ describe("test createHandler", () => {
 
     await handler(req, res);
 
-    const result = JSON.parse(res._getData());
+    const result = superjson.parse<{ error: string }>(res._getData());
 
     expect(res.statusCode).toBe(404);
 

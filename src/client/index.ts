@@ -1,5 +1,7 @@
 import { useMutation, useQuery } from "react-query";
 import { InferRequest, InferResponse, InferUrl } from "../types";
+import superjson from "superjson";
+import ssrConsumer from "./ssrConsumer";
 
 const fetcher = <T>(
   url: InferUrl<T>,
@@ -9,7 +11,9 @@ const fetcher = <T>(
     body: JSON.stringify(request),
     method: "POST",
     headers: { "Content-Type": "application/json" },
-  }).then((res) => res.json());
+  })
+    .then((res) => res.json())
+    .then((json) => superjson.deserialize(json));
 };
 
 const useApiQuery = <T>(url: InferUrl<T>, request: InferRequest<T>) => {
@@ -24,4 +28,9 @@ const useApiMutation = <T>(url: InferUrl<T>) => {
   });
 };
 
-export { useApiQuery as useQuery, useApiMutation as useMutation, fetcher };
+export {
+  useApiQuery as useQuery,
+  useApiMutation as useMutation,
+  fetcher,
+  ssrConsumer,
+};

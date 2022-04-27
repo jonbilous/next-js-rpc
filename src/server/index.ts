@@ -98,32 +98,30 @@ export const createApi = ({
       res: NextApiResponse<ResponseType>
     ) => {
       if (req.method !== "POST") {
-        return res.status(400).json({ error: "Must use POST" } as any);
+        return res
+          .status(400)
+          .json(superjson.serialize({ error: "Must use POST" }) as any);
       }
 
       return getResult(req.body, { req, res }, fn)
         .then((result) => {
-          return res.status(200).json(result);
+          return res.status(200).json(superjson.serialize(result) as any);
         })
         .catch((err) => {
-          if (err instanceof HTTPError) {
-            return res.status(err.status).json({ error: err.message } as any);
-          }
+          const message =
+            err instanceof HTTPError ? err.message : "Internal server error";
+
+          const code = err instanceof HTTPError ? err.status : 501;
 
           return res
-            .status(501)
-            .json({ error: "Internal server error" } as any);
+            .status(code)
+            .json(superjson.serialize({ error: message }) as any);
         });
     };
 
-    const serverFn = async (
-      data: RequestBody,
-      { req, res }: HandlerContext
-    ) => {
+    handler.ssr = (data: RequestBody, { req, res }: HandlerContext) => {
       return getResult(data, { req, res }, fn);
     };
-
-    handler.ssr = serverFn;
 
     return handler;
   };
