@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.17.4](https://github.com/jonbilous/next-js-rpc/compare/v1.17.3...v1.17.4) (2022-04-27)
+
+
+### Bug Fixes
+
+* **ssrconsumer:** copy props before mutating ([b63e240](https://github.com/jonbilous/next-js-rpc/commit/b63e2403e46ed81be2befb448388699af521510c))
+
 ## [1.17.3](https://github.com/jonbilous/next-js-rpc/compare/v1.17.2...v1.17.3) (2022-04-27)
 
 
