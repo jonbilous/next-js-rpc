@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.19.0](https://github.com/jonbilous/next-js-rpc/compare/v1.18.1...v1.19.0) (2022-04-27)
+
+
+### Features
+
+* **ssrprovider/consumer:** remove ([2aa1ae0](https://github.com/jonbilous/next-js-rpc/commit/2aa1ae0810c84ed4bd0e1e45bd66b8bb2d925080))
+
 ## [1.18.1](https://github.com/jonbilous/next-js-rpc/compare/v1.18.0...v1.18.1) (2022-04-27)
 
 
