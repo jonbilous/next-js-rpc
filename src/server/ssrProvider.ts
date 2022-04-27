@@ -10,9 +10,7 @@ const ssrProvider = <T>(
     const props = { ...(res as any).props };
 
     Object.entries(props).forEach(([key, value]: [string, any]) => {
-      if (value.json && value.meta) {
-        props[key] = superjson.serialize(value);
-      }
+      props[key] = superjson.serialize(value);
     });
 
     return { props, ...res };
