@@ -71,7 +71,9 @@ export const createApi = ({
       if (cache) {
         const key = [url, cache.getKey(validatedData, handlerCtx)].join("-");
 
-        const cachedResult = await cacheProvider.get<ResponseType>(key);
+        const cachedResult = await cacheProvider
+          .get<ResponseType>(key)
+          .catch((err) => null);
 
         if (cachedResult) {
           return cachedResult;
