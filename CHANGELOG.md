@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.17.2](https://github.com/jonbilous/next-js-rpc/compare/v1.17.1...v1.17.2) (2022-04-27)
+
+
+### Bug Fixes
+
+* **server side fn:** superjson serialize on ssr fn ([b3fe9a3](https://github.com/jonbilous/next-js-rpc/commit/b3fe9a35c0a93d2153004732392cc654503d4ede))
+
 ## [1.17.1](https://github.com/jonbilous/next-js-rpc/compare/v1.17.0...v1.17.1) (2022-04-27)
 
 
