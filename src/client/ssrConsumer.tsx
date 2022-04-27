@@ -1,11 +1,17 @@
 import React from "react";
 import superjson from "superjson";
 
-const ssrConsumer = <T extends {}>(Component: React.FC<T>): React.FC<T> => {
+const ssrConsumer = <T extends Record<string, unknown>>(
+  Component: React.FC<T>
+): React.FC<T> => {
   return (props) => {
-    const parsedProps = superjson.deserialize<T>(props as any);
+    Object.entries(props).forEach(([key, value]: [string, any]) => {
+      if (value.json && value.meta) {
+        props[key as keyof T] = superjson.deserialize(value);
+      }
+    });
 
-    return <Component {...parsedProps} />;
+    return <Component {...props} />;
   };
 };
 
