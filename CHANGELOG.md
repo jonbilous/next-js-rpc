@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.16.1](https://github.com/jonbilous/next-js-rpc/compare/v1.16.0...v1.16.1) (2022-04-27)
+
+
+### Bug Fixes
+
+* **cache:** catch errors when getting item from cache ([94e05ef](https://github.com/jonbilous/next-js-rpc/commit/94e05ef602cd521ec60c35f6097a7ec79d52256e))
+
 # [1.16.0](https://github.com/jonbilous/next-js-rpc/compare/v1.15.1...v1.16.0) (2022-04-27)
 
 
