@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.17.0](https://github.com/jonbilous/next-js-rpc/compare/v1.16.1...v1.17.0) (2022-04-27)
+
+
+### Features
+
+* **ssrconsumer:** create ssrconsumer HOC for parsing json ([18b62e1](https://github.com/jonbilous/next-js-rpc/commit/18b62e1eca7391b144ee34c1f34f9700d9d83010))
+
 ## [1.16.1](https://github.com/jonbilous/next-js-rpc/compare/v1.16.0...v1.16.1) (2022-04-27)
 
 
