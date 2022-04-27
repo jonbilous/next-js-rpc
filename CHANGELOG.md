@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.17.1](https://github.com/jonbilous/next-js-rpc/compare/v1.17.0...v1.17.1) (2022-04-27)
+
+
+### Bug Fixes
+
+* **peer dependencies:** update peer deps ([8569d71](https://github.com/jonbilous/next-js-rpc/commit/8569d71f82739595f0c9be390b8288a7e5541899))
+
 # [1.17.0](https://github.com/jonbilous/next-js-rpc/compare/v1.16.1...v1.17.0) (2022-04-27)
 
 
