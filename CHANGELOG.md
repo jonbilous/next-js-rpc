@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.1](https://github.com/jonbilous/next-js-rpc/compare/v1.18.0...v1.18.1) (2022-04-27)
+
+
+### Bug Fixes
+
+* **ssrprovider:** serialize all props ([ec404aa](https://github.com/jonbilous/next-js-rpc/commit/ec404aa10c9ab80a793693a812b2eb093c9bbfa1))
+
 # [1.18.0](https://github.com/jonbilous/next-js-rpc/compare/v1.17.4...v1.18.0) (2022-04-27)
 
 
