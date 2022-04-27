@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.18.0](https://github.com/jonbilous/next-js-rpc/compare/v1.17.4...v1.18.0) (2022-04-27)
+
+
+### Features
+
+* **ssrprovider:** create ssr provider to serialize data ([b9c33b0](https://github.com/jonbilous/next-js-rpc/commit/b9c33b0849a2c6938c962d83cea1d7d3aba70421))
+
 ## [1.17.4](https://github.com/jonbilous/next-js-rpc/compare/v1.17.3...v1.17.4) (2022-04-27)
 
 
