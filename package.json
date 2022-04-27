@@ -74,5 +74,8 @@
     "next": "^12.1.5",
     "react-query": "^3.36.0",
     "zod": "^3.14.4"
+  },
+  "dependencies": {
+    "superjson": "^1.9.0"
   }
 }
