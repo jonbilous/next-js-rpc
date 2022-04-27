@@ -15,6 +15,8 @@ export class HTTPError extends Error {
   }
 }
 
+export * from "./ssrProvider";
+
 export const createApi = ({
   cacheProvider,
 }: {
@@ -123,9 +125,7 @@ export const createApi = ({
       data: RequestBody,
       { req, res }: HandlerContext
     ): Promise<ResponseType> => {
-      return getResult(data, { req, res }, fn).then(
-        (res) => superjson.serialize(res) as any
-      );
+      return getResult(data, { req, res }, fn);
     };
 
     return handler;
