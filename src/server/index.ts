@@ -15,8 +15,6 @@ export class HTTPError extends Error {
   }
 }
 
-export * from "./ssrProvider";
-
 export const createApi = ({
   cacheProvider,
 }: {

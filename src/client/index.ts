@@ -1,7 +1,6 @@
 import { useMutation, useQuery } from "react-query";
 import { InferRequest, InferResponse, InferUrl } from "../types";
 import superjson from "superjson";
-import ssrConsumer from "./ssrConsumer";
 
 const fetcher = <T>(
   url: InferUrl<T>,
@@ -28,9 +27,4 @@ const useApiMutation = <T>(url: InferUrl<T>) => {
   });
 };
 
-export {
-  useApiQuery as useQuery,
-  useApiMutation as useMutation,
-  fetcher,
-  ssrConsumer,
-};
+export { useApiQuery as useQuery, useApiMutation as useMutation, fetcher };
