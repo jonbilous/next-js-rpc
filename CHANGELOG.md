@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.17.3](https://github.com/jonbilous/next-js-rpc/compare/v1.17.2...v1.17.3) (2022-04-27)
+
+
+### Bug Fixes
+
+* **ssrconsumer:** fix serialization logic ([e7af069](https://github.com/jonbilous/next-js-rpc/commit/e7af069a53a7aa3c2c5211dda3e9bbab29f610a9))
+
 ## [1.17.2](https://github.com/jonbilous/next-js-rpc/compare/v1.17.1...v1.17.2) (2022-04-27)
 
 
