@@ -119,8 +119,13 @@ export const createApi = ({
         });
     };
 
-    handler.ssr = (data: RequestBody, { req, res }: HandlerContext) => {
-      return getResult(data, { req, res }, fn);
+    handler.ssr = (
+      data: RequestBody,
+      { req, res }: HandlerContext
+    ): Promise<ResponseType> => {
+      return getResult(data, { req, res }, fn).then(
+        (res) => superjson.serialize(res) as any
+      );
     };
 
     return handler;
