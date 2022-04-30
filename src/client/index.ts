@@ -2,17 +2,25 @@ import { useMutation, useQuery } from "react-query";
 import { InferRequest, InferResponse, InferUrl } from "../types";
 import superjson from "superjson";
 
-const fetcher = <T>(
+const fetcher = async <T>(
   url: InferUrl<T>,
   request: InferRequest<T>
 ): Promise<InferResponse<T>> => {
-  return fetch(String(url), {
+  const response = await fetch(String(url), {
     body: JSON.stringify(request),
     method: "POST",
     headers: { "Content-Type": "application/json" },
-  })
-    .then((res) => res.json())
+  });
+
+  const body = await response
+    .json()
     .then((json) => superjson.deserialize(json));
+
+  if (response.status !== 200) {
+    throw new Error(body);
+  }
+
+  return body;
 };
 
 const useApiQuery = <T>(url: InferUrl<T>, request: InferRequest<T>) => {
