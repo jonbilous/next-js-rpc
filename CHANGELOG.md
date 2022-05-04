@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.21.0](https://github.com/jonbilous/next-js-rpc/compare/v1.20.0...v1.21.0) (2022-05-04)
+
+
+### Features
+
+* **error handling:** throw error after sending status to client ([258431e](https://github.com/jonbilous/next-js-rpc/commit/258431e4adbccfd44dc4c6669125d53914c3e3f9))
+
 # [1.20.0](https://github.com/jonbilous/next-js-rpc/compare/v1.19.0...v1.20.0) (2022-04-30)
 
 
