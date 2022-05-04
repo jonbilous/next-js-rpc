@@ -113,9 +113,9 @@ export const createApi = ({
 
           const code = err instanceof HTTPError ? err.status : 501;
 
-          return res
-            .status(code)
-            .json(superjson.serialize({ error: message }) as any);
+          res.status(code).json(superjson.serialize({ error: message }) as any);
+
+          throw err;
         });
     };
 

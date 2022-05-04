@@ -41,7 +41,7 @@ describe("test createHandler", () => {
       },
     });
 
-    await handler(req, res);
+    await handler(req, res).catch((err) => {});
 
     expect(mockCtx).toBeCalledTimes(1);
 
@@ -69,7 +69,7 @@ describe("test createHandler", () => {
       schema: zod.any(),
     });
 
-    await handler(req, res);
+    await handler(req, res).catch((err) => {});
 
     const result = superjson.parse<{ error: string }>(res._getData());
 
@@ -101,7 +101,7 @@ describe("test createHandler", () => {
       schema: zod.any(),
     });
 
-    await handler(req, res);
+    await handler(req, res).catch((err) => {});
 
     const result = superjson.parse<{ error: string }>(res._getData());
 
@@ -128,7 +128,7 @@ describe("test createHandler", () => {
       schema: zod.any(),
     });
 
-    await handler(req, res);
+    await handler(req, res).catch((err) => {});
 
     const result = superjson.parse<{ error: string }>(res._getData());
 
@@ -155,7 +155,7 @@ describe("test createHandler", () => {
       schema: zod.object({ hello: zod.string() }),
     });
 
-    await handler(req, res);
+    await handler(req, res).catch((err) => {});
 
     const result = superjson.parse<{ error: string }>(res._getData());
 
