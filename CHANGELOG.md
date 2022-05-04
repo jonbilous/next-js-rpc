@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.20.0](https://github.com/jonbilous/next-js-rpc/compare/v1.19.0...v1.20.0) (2022-04-30)
+
+
+### Features
+
+* **client:** identify api errors on client ([0d19d9c](https://github.com/jonbilous/next-js-rpc/commit/0d19d9c40352caaf96d454698500d913402ad205))
+
 # [1.19.0](https://github.com/jonbilous/next-js-rpc/compare/v1.18.1...v1.19.0) (2022-04-27)
 
 
